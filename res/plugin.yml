@@ -1,0 +1,19 @@
+name: ColourNames
+main: com.rayzr522.colournames.ColourNamesPlugin
+version: 1.0
+description: Allows you to set the colour of your name!
+commands:
+  name:
+    description: Sets the colour of your name
+  male:
+    description: Sets the colour of your name to the default male color
+  female:
+    description: Sets the colour of your name to the default female color
+  normal:
+    description: Sets the colour of your name to the default color
+  colorhelp:
+    description: Lists all the possible color codes
+    aliases:
+    - colourhelp
+    - colors
+    - colours

@@ -1,0 +1,16 @@
+# The permission required to use the commands
+permission: "ColourNames.Use"
+
+# These are the color codes for the different genders
+color-male: "&a"
+color-female: "&d"
+color-normal: "&7"
+
+# All the messages, you can configure these to whatever you want :)
+messages:
+    no-permission: "&cYou don't have permission to do that!"
+    name-set: "&7Your name has now been set to {0}"
+    invalid-syntax: "&7Error! Incorrect syntax! Example usage: &a/name {0} &7-> {1}"
+    usage: "&7Example usage: &a/name {0} &7-> {1}"
+    only-one-each: "&cYou can only use one color code and one formatting code"
+    color-code: "{0} &7->&r {1}"
