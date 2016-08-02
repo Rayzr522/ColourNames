@@ -41,6 +41,7 @@ public class ColourNamesPlugin extends JavaPlugin implements Listener {
 		getCommand("female").setExecutor(new CommandFemale());
 		getCommand("normal").setExecutor(new CommandNormal());
 		getCommand("colorhelp").setExecutor(new CommandColorHelp());
+		getCommand("colornames").setExecutor(new CommandColorNames(this));
 
 		getServer().getPluginManager().registerEvents(this, this);
 
@@ -80,6 +81,18 @@ public class ColourNamesPlugin extends JavaPlugin implements Listener {
 		data.updateName(p);
 
 		Config.players.put(id, data);
+
+	}
+
+	public void reload() {
+
+		Config.reload();
+
+	}
+
+	public void save() {
+
+		Config.savePlayers();
 
 	}
 

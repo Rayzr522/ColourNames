@@ -15,6 +15,7 @@ import org.bukkit.entity.Player;
 public class Config {
 
 	public static String					PERMISSION;
+	public static String					PERMISSION_ADMIN;
 	public static String					COLOR_MALE;
 	public static String					COLOR_FEMALE;
 	public static String					COLOR_NORMAL;
@@ -30,19 +31,22 @@ public class Config {
 
 		reload();
 
+		loadPlayers();
+
 	}
 
 	public static void reload() {
 
+		plugin.reloadConfig();
+
 		config = plugin.getConfig();
 
 		PERMISSION = config.getString("permission");
+		PERMISSION_ADMIN = config.getString("permission-admin");
 
 		COLOR_MALE = config.getString("color-male");
 		COLOR_FEMALE = config.getString("color-female");
 		COLOR_NORMAL = config.getString("color-normal");
-
-		loadPlayers();
 
 	}
 
