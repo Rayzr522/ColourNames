@@ -35,7 +35,14 @@ public class CommandName implements CommandExecutor {
 
 		int response = checkColorCodes(args[0]);
 
-		if (response == 2) {
+		if (response == 3) {
+
+			p.sendMessage(ChatColor.RED + "Something went horribly wrong. Please contact the author (Rayzr522) on Spigot or Bukkit for help.");
+			return true;
+
+		}
+
+		else if (response == 2) {
 
 			p.sendMessage(Config.msg("invalid-syntax", "&a&l", ChatColor.GREEN + "" + ChatColor.BOLD + p.getName()));
 			return true;
@@ -65,6 +72,10 @@ public class CommandName implements CommandExecutor {
 	}
 
 	private int checkColorCodes(String text) {
+
+		if (text == null) { return 3; }
+
+		text = text.toLowerCase();
 
 		if (text.replaceAll("&[a-f0-9klmnor]", "").length() > 0) { return 2; }
 

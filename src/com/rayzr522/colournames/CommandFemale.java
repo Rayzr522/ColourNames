@@ -31,7 +31,7 @@ public class CommandFemale implements CommandExecutor {
 
 		Config.setPlayer(p, data);
 		
-		p.sendMessage(Config.msg("name-set", p.getDisplayName()));
+		p.sendMessage(Config.msg("name-female"));
 
 		return true;
 

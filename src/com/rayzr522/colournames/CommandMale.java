@@ -31,7 +31,7 @@ public class CommandMale implements CommandExecutor {
 
 		Config.setPlayer(p, data);
 
-		p.sendMessage(Config.msg("name-set", p.getDisplayName()));
+		p.sendMessage(Config.msg("name-male"));
 
 		return true;
 
