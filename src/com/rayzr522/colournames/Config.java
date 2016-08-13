@@ -19,6 +19,7 @@ public class Config {
 	public static String					COLOR_MALE;
 	public static String					COLOR_FEMALE;
 	public static String					COLOR_NORMAL;
+	public static boolean					ALLOW_MAGIC_COLOR;
 
 	private static ColourNamesPlugin		plugin;
 	private static FileConfiguration		config;
@@ -47,6 +48,7 @@ public class Config {
 		COLOR_MALE = config.getString("color-male");
 		COLOR_FEMALE = config.getString("color-female");
 		COLOR_NORMAL = config.getString("color-normal");
+		ALLOW_MAGIC_COLOR = config.getBoolean("allow-magic-color");
 
 	}
 

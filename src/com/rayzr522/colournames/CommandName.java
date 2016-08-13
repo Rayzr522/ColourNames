@@ -37,7 +37,8 @@ public class CommandName implements CommandExecutor {
 
 		if (response == 3) {
 
-			p.sendMessage(ChatColor.RED + "Something went horribly wrong. Please contact the author (Rayzr522) on Spigot or Bukkit for help.");
+			p.sendMessage(ChatColor.RED + "Something went horribly wrong.");
+			p.sendMessage(ChatColor.RED + " Please find a server admin and tell them to contact the author of this plugin (Rayzr522) on Spigot or Bukkit for help.");
 			return true;
 
 		}
@@ -78,6 +79,7 @@ public class CommandName implements CommandExecutor {
 		text = text.toLowerCase();
 
 		if (text.replaceAll("&[a-f0-9klmnor]", "").length() > 0) { return 2; }
+		if (!Config.ALLOW_MAGIC_COLOR && text.contains("&k")) { return 2; }
 
 		if (Regex.numMatches(text, "&[a-f0-9]") > 1 || Regex.numMatches(text, "&[klmnor]") > 1) { return 1; }
 

@@ -7,6 +7,8 @@ color-male: "&a"
 color-female: "&d"
 color-normal: "&7"
 
+allow-magic-color: false
+
 # All the messages, you can configure these to whatever you want :)
 messages:
     version: "&7You're running &a{0} &7v&a{1}"

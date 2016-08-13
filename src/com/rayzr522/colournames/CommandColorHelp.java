@@ -46,7 +46,9 @@ public class CommandColorHelp implements CommandExecutor {
 		code(p, "e", "yellow");
 		code(p, "f", "white");
 		p.sendMessage(HORIZONTAL_BAR);
-		code(p, "k", "magic");
+		if (Config.ALLOW_MAGIC_COLOR) {
+			code(p, "k", "magic");
+		}
 		code(p, "l", "bold");
 		code(p, "m", "strike through");
 		code(p, "n", "underline");
