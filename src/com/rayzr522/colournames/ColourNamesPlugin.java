@@ -3,6 +3,8 @@ package com.rayzr522.colournames;
 
 import java.util.UUID;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -13,7 +15,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class ColourNamesPlugin extends JavaPlugin implements Listener {
 
-	private Logger logger;
+	private static int	versionNumber	= 0;
+	private Logger		logger;
 
 	@Override
 	public void onEnable() {
@@ -93,6 +96,27 @@ public class ColourNamesPlugin extends JavaPlugin implements Listener {
 	public void save() {
 
 		Config.savePlayers();
+
+	}
+
+	public static int getMinecraftVersion() {
+
+		if (versionNumber < 1) {
+
+			String[] split = Bukkit.getServer().getClass().getPackage().getName().split("\\.");
+			String base = split[split.length - 1];
+			try {
+				Matcher matcher = Pattern.compile("v1_([0-9]+)_R[0-9]").matcher(base);
+				matcher.matches();
+				versionNumber = Integer.parseInt(matcher.group(1));
+			} catch (Exception e) {
+				System.err.println("Failed to get the server version number!");
+				e.printStackTrace();
+			}
+
+		}
+
+		return versionNumber;
 
 	}
 

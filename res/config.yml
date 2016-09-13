@@ -9,6 +9,9 @@ color-normal: "&7"
 
 allow-magic-color: false
 
+# This will only work in 1.8+
+change-tablist: true
+
 # All the messages, you can configure these to whatever you want :)
 messages:
     version: "&7You're running &a{0} &7v&a{1}"

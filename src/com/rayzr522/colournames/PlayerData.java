@@ -43,8 +43,15 @@ public class PlayerData {
 	}
 
 	public void updateName(Player player) {
-
-		player.setDisplayName(TextUtils.colorize(color) + player.getName() + ChatColor.RESET);
+		String name = TextUtils.colorize(color) + player.getName() + ChatColor.RESET;
+		player.setDisplayName(name);
+		if (Config.CHANGE_TABLIST) {
+			try {
+				player.setPlayerListName(name);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 
 	}
 
