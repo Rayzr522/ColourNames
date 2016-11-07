@@ -14,151 +14,155 @@ import org.bukkit.entity.Player;
 
 public class Config {
 
-	public static String					PERMISSION;
-	public static String					PERMISSION_ADMIN;
-	public static String					COLOR_MALE;
-	public static String					COLOR_FEMALE;
-	public static String					COLOR_NORMAL;
-	public static boolean					ALLOW_MAGIC_COLOR;
-	public static boolean					CHANGE_TABLIST;
+    public static String                    PERMISSION;
+    public static String                    PERMISSION_ADMIN;
+    public static String                    COLOR_MALE;
+    public static String                    COLOR_FEMALE;
+    public static String                    COLOR_NORMAL;
+    public static boolean                   ALLOW_MAGIC_COLOR;
+    public static boolean                   CHANGE_TABLIST;
 
-	private static ColourNamesPlugin		plugin;
-	private static FileConfiguration		config;
+    private static ColourNamesPlugin        plugin;
+    private static FileConfiguration        config;
 
-	public static HashMap<UUID, PlayerData>	players;
+    public static HashMap<UUID, PlayerData> players;
 
-	public static void init(ColourNamesPlugin plugin) {
+    public static void init(ColourNamesPlugin plugin) {
 
-		Config.plugin = plugin;
+        Config.plugin = plugin;
 
-		reload();
+        reload();
 
-		loadPlayers();
+        loadPlayers();
 
-	}
+    }
 
-	public static void reload() {
+    public static void reload() {
 
-		plugin.reloadConfig();
+        plugin.reloadConfig();
 
-		config = plugin.getConfig();
+        config = plugin.getConfig();
 
-		PERMISSION = config.getString("permission");
-		PERMISSION_ADMIN = config.getString("permission-admin");
+        PERMISSION = config.getString("permission");
+        PERMISSION_ADMIN = config.getString("permission-admin");
 
-		COLOR_MALE = config.getString("color-male");
-		COLOR_FEMALE = config.getString("color-female");
-		COLOR_NORMAL = config.getString("color-normal");
+        COLOR_MALE = config.getString("color-male");
+        COLOR_FEMALE = config.getString("color-female");
+        COLOR_NORMAL = config.getString("color-normal");
 
-		ALLOW_MAGIC_COLOR = config.getBoolean("allow-magic-color");
-		CHANGE_TABLIST = config.getBoolean("change-tablist") && ColourNamesPlugin.getMinecraftVersion() >= 8;
+        ALLOW_MAGIC_COLOR = config.getBoolean("allow-magic-color");
+        CHANGE_TABLIST = config.getBoolean("change-tablist") && ColourNamesPlugin.getMinecraftVersion() >= 8;
 
-	}
+    }
 
-	public static void loadPlayers() {
+    public static void loadPlayers() {
 
-		players = new HashMap<UUID, PlayerData>();
+        players = new HashMap<UUID, PlayerData>();
 
-		YamlConfiguration config = getConfig("players.yml");
+        YamlConfiguration config = getConfig("players.yml");
 
-		for (String key : config.getKeys(false)) {
+        for (String key : config.getKeys(false)) {
 
-			if (!config.isConfigurationSection(key)) {
-				config.set(key, null);
-				continue;
-			}
+            if (!config.isConfigurationSection(key)) {
+                config.set(key, null);
+                continue;
+            }
 
-			ConfigurationSection section = config.getConfigurationSection(key);
+            ConfigurationSection section = config.getConfigurationSection(key);
 
-			UUID id = UUID.fromString(key);
-			String lastName = section.getString("lastName");
-			String color = section.getString("color");
+            UUID id = UUID.fromString(key);
+            String lastName = section.getString("lastName");
+            String color = section.getString("color");
 
-			players.put(id, new PlayerData(id, lastName, color));
+            players.put(id, new PlayerData(id, lastName, color));
 
-		}
+        }
 
-	}
+    }
 
-	public static void savePlayers() {
+    public static void savePlayers() {
 
-		YamlConfiguration config = getConfig("players.yml");
+        YamlConfiguration config = getConfig("players.yml");
 
-		for (PlayerData data : players.values()) {
+        for (PlayerData data : players.values()) {
 
-			String key = data.getId().toString();
+            String key = data.getId().toString();
 
-			ConfigurationSection section;
+            ConfigurationSection section;
 
-			if (config.isConfigurationSection(key)) {
-				section = config.getConfigurationSection(key);
-			} else {
-				section = config.createSection(key);
-			}
+            if (config.isConfigurationSection(key)) {
+                section = config.getConfigurationSection(key);
+            } else {
+                section = config.createSection(key);
+            }
 
-			section.set("lastName", data.getLastName());
-			section.set("color", data.getColor());
+            section.set("lastName", data.getLastName());
+            section.set("color", data.getColor());
 
-		}
+        }
 
-		File file = getFile("players.yml");
-		try {
-			file.createNewFile();
-			config.save(file);
-		} catch (IOException e) {
-			System.err.println("Failed to save players.yml");
-			e.printStackTrace();
-		}
+        File file = getFile("players.yml");
+        try {
+            file.createNewFile();
+            config.save(file);
+        } catch (IOException e) {
+            System.err.println("Failed to save players.yml");
+            e.printStackTrace();
+        }
 
-	}
+    }
 
-	public static String msg(String label, String... params) {
+    public static String msg(String label, String... params) {
 
-		if (!config.contains("messages." + label.toLowerCase())) { return null; }
+        if (!config.contains("messages." + label.toLowerCase())) {
+            return null;
+        }
 
-		String output = config.getString("messages." + label.toLowerCase());
-		output = ChatColor.translateAlternateColorCodes('&', output);
+        String output = config.getString("messages." + label.toLowerCase());
+        output = ChatColor.translateAlternateColorCodes('&', output);
 
-		if (params == null || params.length < 1) { return output; }
+        if (params == null || params.length < 1) {
+            return output;
+        }
 
-		for (int i = 0; i < params.length; i++) {
+        for (int i = 0; i < params.length; i++) {
 
-			output = output.replaceAll("\\{" + i + "\\}", params[i]);
+            output = output.replaceAll("\\{" + i + "\\}", params[i]);
 
-		}
+        }
 
-		return output;
+        return output;
 
-	}
+    }
 
-	public static YamlConfiguration getConfig(String path) {
+    public static YamlConfiguration getConfig(String path) {
 
-		File file = getFile(path);
+        File file = getFile(path);
 
-		if (file.exists()) {
-			return YamlConfiguration.loadConfiguration(file);
-		} else {
-			return new YamlConfiguration();
-		}
+        if (file.exists()) {
+            return YamlConfiguration.loadConfiguration(file);
+        } else {
+            return new YamlConfiguration();
+        }
 
-	}
+    }
 
-	public static File getFile(String path) {
+    public static File getFile(String path) {
 
-		return new File(plugin.getDataFolder() + File.separator + path);
+        return new File(plugin.getDataFolder() + File.separator + path);
 
-	}
+    }
 
-	public static PlayerData getPlayer(Player player) {
+    public static PlayerData getPlayer(Player player) {
 
-		return players.containsKey(player.getUniqueId()) ? players.get(player.getUniqueId()) : null;
+        return players.containsKey(player.getUniqueId()) ? players.get(player.getUniqueId()) : null;
 
-	}
+    }
 
-	public static void setPlayer(Player player, PlayerData data) {
+    public static void setPlayer(Player player, PlayerData data) {
 
-		players.put(player.getUniqueId(), data);
+        players.put(player.getUniqueId(), data);
 
-	}
+    }
 
 }

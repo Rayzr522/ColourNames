@@ -9,32 +9,32 @@ import org.bukkit.entity.Player;
 
 public class CommandMale implements CommandExecutor {
 
-	@Override
-	public boolean onCommand(CommandSender sender, Command command, String cmd, String[] args) {
+    @Override
+    public boolean onCommand(CommandSender sender, Command command, String cmd, String[] args) {
 
-		if (!(sender instanceof Player)) {
-			sender.sendMessage(ChatColor.RED + "Only players can use this command!");
-			return true;
-		}
+        if (!(sender instanceof Player)) {
+            sender.sendMessage(ChatColor.RED + "Only players can use this command!");
+            return true;
+        }
 
-		Player p = (Player) sender;
+        Player p = (Player) sender;
 
-		if (!p.hasPermission(Config.PERMISSION)) {
-			p.sendMessage(Config.msg("no-permission"));
-			return true;
-		}
+        if (!p.hasPermission(Config.PERMISSION)) {
+            p.sendMessage(Config.msg("no-permission"));
+            return true;
+        }
 
-		PlayerData data = Config.getPlayer(p);
+        PlayerData data = Config.getPlayer(p);
 
-		data.setColor(Config.COLOR_MALE);
-		data.updateName(p);
+        data.setColor(Config.COLOR_MALE);
+        data.updateName(p);
 
-		Config.setPlayer(p, data);
+        Config.setPlayer(p, data);
 
-		p.sendMessage(Config.msg("name-male"));
+        p.sendMessage(Config.msg("name-male"));
 
-		return true;
+        return true;
 
-	}
+    }
 
 }
